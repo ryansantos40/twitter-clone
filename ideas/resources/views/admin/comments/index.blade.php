@@ -10,6 +10,7 @@
     </div>
     <div class="col-9">
         <h1>Comments</h1>
+        @include('shared.sucess-message')
         <table class="table table-striped mt-3">
             <thead class="table-dark">
                 <tr>
@@ -30,7 +31,11 @@
                     <td>{{ $comment->content }}</td>
                     <td>{{ $comment->created_at->toDateString() }}</td>
                     <td>
-                        --
+                        <form action="{{ route('admin.comments.destroy', $comment) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit"> Delete </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
